@@ -1,8 +1,10 @@
 // Get DOM elements
 const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
-itemInput.focus();
 const itemList = document.querySelector('#item-list');
+const clearBtn = document.querySelector('#clear');
+
+itemInput.focus();
 
 // Add item to list
 function addItem(e) {
@@ -53,6 +55,7 @@ function popupMessage(message) {
     }, 3000);
 }
 
+// Remove item from list
 function removeItem(e) {
 
     if (e.target.parentElement.classList.contains('remove-item')) {
@@ -60,7 +63,12 @@ function removeItem(e) {
     }
 }
 
+// Clear all
+function clearAll() {
+    itemList.innerHTML = '';
+}
 
 // Event listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
+clearBtn.addEventListener('click', clearAll);
