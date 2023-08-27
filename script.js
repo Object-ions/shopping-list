@@ -3,6 +3,7 @@ const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
 const clearBtn = document.querySelector('#clear');
+const itemFilter = document.querySelector('#filter');
 
 itemInput.focus();
 
@@ -38,6 +39,9 @@ function addItem(e) {
         // Append li to itemList
         itemList.appendChild(li);
 
+        // Check UI
+        checkUI();
+        
         // Clear input and focus
         itemInput.value = '';
         itemInput.focus();
@@ -68,7 +72,23 @@ function clearAll() {
     itemList.innerHTML = '';
 }
 
+// Check UI if 'li' exist
+function checkUI () {
+    const items = document.querySelectorAll('li');
+
+    if (items.length === 0) {
+        clearBtn.style = 'display: none';
+        itemFilter.style = 'display: none';
+    } else {
+        clearBtn.style = 'display: block';
+        itemFilter.style = 'display: block';
+    }
+}
+
+
 // Event listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearAll);
+
+checkUI();
