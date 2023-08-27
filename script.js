@@ -40,8 +40,8 @@ function addItem(e) {
         itemList.appendChild(li);
 
         // Check UI
-        checkUI();
-        
+        resetDOM();
+
         // Clear input and focus
         itemInput.value = '';
         itemInput.focus();
@@ -63,17 +63,24 @@ function popupMessage(message) {
 function removeItem(e) {
 
     if (e.target.parentElement.classList.contains('remove-item')) {
-        e.target.parentElement.parentElement.remove();
+        if (confirm('Are you sure you want to remove this item?')) {
+            e.target.parentElement.parentElement.remove();
+        
+            resetDOM();
+        }
     }
 }
 
 // Clear all
 function clearAll() {
+    if (confirm('Are you sure you want to clear all items?')) {
     itemList.innerHTML = '';
+    resetDOM();
+    }
 }
 
-// Check UI if 'li' exist
-function checkUI () {
+// reset DOM
+function resetDOM () {
     const items = document.querySelectorAll('li');
 
     if (items.length === 0) {
@@ -91,4 +98,4 @@ itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearAll);
 
-checkUI();
+resetDOM();
