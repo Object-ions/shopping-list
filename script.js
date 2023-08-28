@@ -1,5 +1,6 @@
 // Get DOM elements
 const itemForm = document.querySelector('#item-form');
+const formBtn = itemForm.querySelector('button');
 const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
 const clearBtn = document.querySelector('#clear');
@@ -92,7 +93,7 @@ function setItemToEdit(item) {
 
     isEditMode = true;
     item.classList.add('edit-mode');
-    const formBtn = itemForm.querySelector('button');
+    
     formBtn.innerHTML = `<i class="fa-solid fa-pencil"></i> Edit Item`;
     formBtn.style.backgroundColor = '#228b22';
     itemInput.value = item.textContent;
@@ -127,6 +128,8 @@ function filterItems(e) {
 
 // reset DOM
 function resetDOM () {
+    itemInput.value = '';
+
     const items = document.querySelectorAll('li');
 
     if (items.length === 0) {
@@ -136,6 +139,13 @@ function resetDOM () {
         clearBtn.style = 'display: block';
         itemFilter.style = 'display: block';
     }
+
+    // Reverse button style
+    formBtn.innerHTML = `<i class="fa-solid fa-plus"></i> Add Item`;
+
+    formBtn.style.backgroundColor = '#333';
+
+    isEditMode = false;
 }
 
 
