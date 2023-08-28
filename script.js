@@ -40,6 +40,11 @@ function addItem(e) {
             itemToEdit.classList.remove('edit-mode');
             itemToEdit.remove();
             isEditMode = false;
+        } else {
+            if (isItemExist(itemInputValue)) {
+                popupMessage('Item already exist');
+                return;
+            }
         }
 
         // Append icon to xButton
@@ -84,6 +89,18 @@ function onClickItem(e) {
         console.log('1');
         setItemToEdit(e.target);
     }
+}
+
+// Check if item already exist
+function isItemExist(item) {
+    const items = itemList.querySelectorAll('li');
+    
+    for(let i of items) {
+        if(i.textContent.toLowerCase() === item.toLowerCase()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // Set item to edit
