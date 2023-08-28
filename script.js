@@ -67,6 +67,7 @@ function addItem(e) {
 
 }
 
+// Popup message
 function popupMessage(message) {
     const popup = document.querySelector('#popup');
     popup.innerHTML = message;
