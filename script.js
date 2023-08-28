@@ -5,6 +5,8 @@ const itemList = document.querySelector('#item-list');
 const clearBtn = document.querySelector('#clear');
 const itemFilter = document.querySelector('#filter');
 
+let isEditMode = false;
+
 itemInput.focus();
 
 // Add item to list
@@ -60,7 +62,7 @@ function popupMessage(message) {
 }
 
 // Remove item from list
-function removeItem(e) {
+function onClickItem(e) {
 
     if (e.target.parentElement.classList.contains('remove-item')) {
         if (confirm('Are you sure you want to remove this item?')) {
@@ -68,7 +70,23 @@ function removeItem(e) {
         
             resetDOM();
         }
+    } else {
+        console.log('1');
+        setItemToEdit(e.target);
     }
+}
+
+// Set item to edit
+function setItemToEdit(item) {
+
+    itemList.querySelectorAll('li').forEach(i => i.classList.remove('edit-mode'));
+
+    isEditMode = true;
+    item.classList.add('edit-mode');
+    const formBtn = itemForm.querySelector('button');
+    formBtn.innerHTML = `<i class="fa-solid fa-pencil"></i> Edit Item`;
+    formBtn.style.backgroundColor = '#228b22';
+    itemInput.value = item.textContent;
 }
 
 // Clear all
@@ -114,7 +132,7 @@ function resetDOM () {
 
 // Event listeners
 itemForm.addEventListener('submit', addItem);
-itemList.addEventListener('click', removeItem);
+itemList.addEventListener('click', onClickItem);
 clearBtn.addEventListener('click', clearAll);
 itemFilter.addEventListener('input', filterItems);
 
