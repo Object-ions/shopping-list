@@ -32,6 +32,15 @@ function addItem(e) {
         const icon = document.createElement('i');
         icon.className = 'fa-solid fa-xmark';
 
+        // Check for edit mode
+        if (isEditMode) {
+            const itemToEdit = itemList.querySelector('.edit-mode');
+
+            itemToEdit.classList.remove('edit-mode');
+            itemToEdit.remove();
+            isEditMode = false;
+        }
+
         // Append icon to xButton
         xButton.appendChild(icon);
 
